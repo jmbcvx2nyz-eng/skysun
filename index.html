@@ -11,13 +11,13 @@
             --bg-color: #000000;
             --text-color: #ffffff;
             --border-color: rgba(255, 255, 255, 0.1);
-            --accent-color: #00d1b2; 
+            --accent-color: #00d1b2; /* Teal Accent */
         }
 
         body.light-mode {
             --bg-color: #ffffff;
             --text-color: #000000;
-            --border-color: rgba(0, 0, 0, 0.1);
+            --border-color: rgba(0, 0, 0, 0.2);
         }
 
         body {
@@ -37,9 +37,7 @@
             width: 44px;
             height: 22px;
         }
-
         .switch input { opacity: 0; width: 0; height: 0; }
-
         .slider {
             position: absolute;
             cursor: pointer;
@@ -48,7 +46,6 @@
             transition: .4s;
             border-radius: 34px;
         }
-
         .slider:before {
             position: absolute;
             content: "";
@@ -60,26 +57,55 @@
             transition: .4s;
             border-radius: 50%;
         }
-
         input:checked + .slider { background-color: var(--accent-color); }
         input:checked + .slider:before { transform: translateX(22px); }
 
-        /* Image Filtering & Grid Styles */
-        img { 
+        /* Image & Grid Styles */
+        .grayscale-img { 
             filter: grayscale(100%) contrast(1.1); 
             transition: 0.5s ease;
         }
-        .light-mode img { filter: grayscale(100%) contrast(1.2); }
+        .light-mode .grayscale-img { filter: grayscale(100%) contrast(1.2); }
 
+        /* Interactive Feature Box Styles */
         .feature-box {
             border: 1px solid var(--border-color);
-            transition: background-color 0.3s;
+            transition: all 0.4s ease;
+            overflow: hidden; /* Required for image zoom */
         }
+        /* Hover state for the box itself */
         .feature-box:hover {
-            background-color: rgba(255, 255, 255, 0.03);
+            background-color: rgba(255, 255, 255, 0.05);
+            border-color: var(--accent-color);
+            transform: translateY(-5px); /* Subtle lift effect */
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
         }
         .light-mode .feature-box:hover {
-            background-color: rgba(0, 0, 0, 0.03);
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        /* Hero Video Background Styles */
+        .video-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+        .video-container video {
+            min-width: 100%;
+            min-height: 100%;
+            object-fit: cover;
+            opacity: 0.6; /* Adjust brightness of video */
+        }
+        /* Dark overlay so text is always readable */
+        .video-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, var(--bg-color) 100%);
+            z-index: 1;
         }
     </style>
 </head>
@@ -87,14 +113,12 @@
 
     <nav class="flex justify-between items-center px-10 py-6 border-b border-[var(--border-color)] sticky top-0 bg-[var(--bg-color)] z-50">
         <div class="text-3xl font-black logo-font uppercase tracking-tighter">XAEROVA</div>
-        
         <div class="hidden lg:flex items-center">
             <div class="flex space-x-10 text-xs font-bold uppercase tracking-[0.3em] opacity-60 mr-12">
                 <a href="#">Product</a>
                 <a href="#">Technology</a>
                 <a href="#">Compliance</a>
             </div>
-
             <div class="flex items-center gap-3 mr-8">
                 <span id="toggleLabel" class="text-[10px] font-bold uppercase tracking-widest opacity-70">Light Mode</span>
                 <label class="switch">
@@ -102,43 +126,55 @@
                     <span class="slider"></span>
                 </label>
             </div>
-
             <button class="border border-current px-6 py-2 text-xs font-bold uppercase tracking-widest hover:bg-[var(--text-color)] hover:text-[var(--bg-color)] transition">
                 Get in touch
             </button>
         </div>
     </nav>
 
-    <header class="pt-32 pb-20 px-10 text-center">
-        <h1 class="text-7xl md:text-9xl font-black uppercase logo-font mb-6 leading-none">
-            EYES IN <br> THE SKY
-        </h1>
-        <p class="text-xl opacity-60 max-w-2xl mx-auto mb-12">
-            The Beehive is the only fully autonomous, AI-powered drone security system built to protect commercial, industrial, and residential properties.
-        </p>
-        <div class="max-w-5xl mx-auto overflow-hidden border border-[var(--border-color)]">
-            <img src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&q=80&w=2000" class="w-full h-auto" alt="XAEROVA Drone Hub">
+    <header class="relative pt-40 pb-32 px-10 text-center overflow-hidden">
+        <div class="video-container">
+            <div class="video-overlay"></div>
+            <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&q=80&w=2000">
+                <source src="https://player.vimeo.com/external/494228721.sd.mp4?s=177e8b0352182800d4001798505031e1620c911d&profile_id=164&oauth2_token_id=57447761" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+        <div class="relative z-10">
+            <h1 class="text-7xl md:text-9xl font-black uppercase logo-font mb-6 leading-none drop-shadow-2xl text-white">
+                EYES IN <br> THE SKY
+            </h1>
+            <p class="text-2xl text-gray-300 max-w-2xl mx-auto mb-12 drop-shadow-md font-semibold">
+                Fully autonomous, AI-powered drone security systems built to protect commercial, industrial, and residential properties.
+            </p>
         </div>
     </header>
 
     <section class="py-24 px-10 max-w-7xl mx-auto">
-        <div class="grid md:grid-cols-3 gap-6">
-            <div class="feature-box p-8 flex flex-col">
-                <h3 class="text-2xl font-bold uppercase logo-font mb-4">Industrial</h3>
-                <p class="opacity-60 text-sm leading-relaxed mb-8 h-20">Defend critical infrastructure from theft, graffiti, and disruption with AI-powered patrols built to plug into your existing security network.</p>
-                <img src="https://images.unsplash.com/photo-1473968512647-3e447244af8f?auto=format&fit=crop&q=80&w=800" class="w-full grayscale h-48 object-cover">
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="feature-box p-8 flex flex-col group cursor-pointer">
+                <h3 class="text-2xl font-bold uppercase logo-font mb-4 transition-colors group-hover:text-[var(--accent-color)]">Industrial</h3>
+                <p class="opacity-60 text-sm leading-relaxed mb-8 h-20 transition-opacity group-hover:opacity-100">Defend critical infrastructure from theft and disruption with patrols built to plug into existing networks.</p>
+                <div class="overflow-hidden h-48 w-full">
+                    <img src="https://images.unsplash.com/photo-1473968512647-3e447244af8f?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover grayscale-img transform transition-transform duration-700 group-hover:scale-110">
+                </div>
             </div>
 
-            <div class="feature-box p-8 flex flex-col">
-                <h3 class="text-2xl font-bold uppercase logo-font mb-4">Commercial</h3>
-                <p class="opacity-60 text-sm leading-relaxed mb-8 h-20">Protect high-traffic commercial sites with autonomous patrols that deter intruders, detect vulnerabilities, and deliver actionable incident reports.</p>
-                <img src="https://images.unsplash.com/photo-1527977966376-1c8408f9f108?auto=format&fit=crop&q=80&w=800" class="w-full grayscale h-48 object-cover">
+            <div class="feature-box p-8 flex flex-col group cursor-pointer">
+                <h3 class="text-2xl font-bold uppercase logo-font mb-4 transition-colors group-hover:text-[var(--accent-color)]">Commercial</h3>
+                <p class="opacity-60 text-sm leading-relaxed mb-8 h-20 transition-opacity group-hover:opacity-100">Protect high-traffic sites with autonomous patrols that deter intruders and deliver incident reports.</p>
+                <div class="overflow-hidden h-48 w-full">
+                    <img src="https://images.unsplash.com/photo-1527977966376-1c8408f9f108?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover grayscale-img transform transition-transform duration-700 group-hover:scale-110">
+                </div>
             </div>
 
-            <div class="feature-box p-8 flex flex-col">
-                <h3 class="text-2xl font-bold uppercase logo-font mb-4">Residential</h3>
-                <p class="opacity-60 text-sm leading-relaxed mb-8 h-20">Give homeowners and communities real-time visibility and peace of mind with on-demand flights, smart alerts, and seamless integration into private security systems.</p>
-                <img src="https://images.unsplash.com/photo-1506947411487-a56738267384?auto=format&fit=crop&q=80&w=800" class="w-full grayscale h-48 object-cover">
+            <div class="feature-box p-8 flex flex-col group cursor-pointer">
+                <h3 class="text-2xl font-bold uppercase logo-font mb-4 transition-colors group-hover:text-[var(--accent-color)]">Residential</h3>
+                <p class="opacity-60 text-sm leading-relaxed mb-8 h-20 transition-opacity group-hover:opacity-100">Give homeowners peace of mind with on-demand flights, smart alerts, and private security integration.</p>
+                <div class="overflow-hidden h-48 w-full">
+                    <img src="https://images.unsplash.com/photo-1506947411487-a56738267384?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover grayscale-img transform transition-transform duration-700 group-hover:scale-110">
+                </div>
             </div>
         </div>
     </section>
