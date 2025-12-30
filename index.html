@@ -3,46 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XERON | Skymind Remote Docks</title>
+    <title>XAEROVA | Autonomous Drone Security</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
+        /* Global Color Variables */
         :root {
-            --bg: #000000;
-            --text: #ffffff;
-            --line: rgba(255, 255, 255, 0.1);
-            --accent: #00d1b2; /* Teal accent from your screenshot */
+            --bg-color: #000000;
+            --text-color: #ffffff;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --accent-color: #00d1b2; /* Teal accent */
+            --card-bg: #0a0a0a;
         }
 
+        /* Light Mode Override */
         body.light-mode {
-            --bg: #ffffff;
-            --text: #000000;
-            --line: rgba(0, 0, 0, 0.1);
+            --bg-color: #ffffff;
+            --text-color: #000000;
+            --border-color: rgba(0, 0, 0, 0.1);
+            --card-bg: #f9f9f9;
         }
 
         body {
-            background-color: var(--bg);
-            color: var(--text);
+            background-color: var(--bg-color);
+            color: var(--text-color);
             font-family: 'Rajdhani', sans-serif;
-            transition: background-color 0.4s ease, color 0.4s ease;
+            transition: background-color 0.3s ease, color 0.3s ease;
             margin: 0;
         }
 
         .logo-font { font-family: 'Orbitron', sans-serif; }
 
-        /* Navigation Toggle Styling */
-        .header-toggle {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-right: 20px;
-        }
-
+        /* Header Toggle Switch Style */
         .switch {
             position: relative;
             display: inline-block;
-            width: 40px;
-            height: 20px;
+            width: 44px;
+            height: 22px;
         }
 
         .switch input { opacity: 0; width: 0; height: 0; }
@@ -50,17 +47,17 @@
         .slider {
             position: absolute;
             cursor: pointer;
-            inset: 0;
+            top: 0; left: 0; right: 0; bottom: 0;
             background-color: #333;
             transition: .4s;
-            border-radius: 20px;
+            border-radius: 34px;
         }
 
         .slider:before {
             position: absolute;
             content: "";
-            height: 14px;
-            width: 14px;
+            height: 16px;
+            width: 16px;
             left: 3px;
             bottom: 3px;
             background-color: white;
@@ -68,35 +65,42 @@
             border-radius: 50%;
         }
 
-        input:checked + .slider { background-color: var(--accent); }
-        input:checked + .slider:before { transform: translateX(20px); }
+        input:checked + .slider { background-color: var(--accent-color); }
+        input:checked + .slider:before { transform: translateX(22px); }
 
-        /* Image Filtering */
-        img { filter: grayscale(100%) contrast(1.1); transition: 0.5s; }
-        .light-mode img { filter: grayscale(100%) contrast(1.2) invert(0); }
+        /* Tech Image Filter */
+        img { 
+            filter: grayscale(100%) contrast(1.1); 
+            transition: filter 0.5s ease;
+            border: 1px solid var(--border-color);
+        }
+        .light-mode img { filter: grayscale(100%) contrast(1.2) brightness(0.9); }
+
+        footer a { transition: opacity 0.2s; }
+        footer a:hover { opacity: 0.6; }
     </style>
 </head>
-<body class="dark-mode">
+<body>
 
-    <nav class="flex justify-between items-center px-10 py-6 border-b border-white/10 sticky top-0 bg-inherit z-50">
-        <div class="text-3xl font-black logo-font uppercase tracking-tighter">XERON</div>
+    <nav class="flex justify-between items-center px-10 py-6 border-b border-[var(--border-color)] sticky top-0 bg-[var(--bg-color)] z-50">
+        <div class="text-3xl font-black logo-font uppercase tracking-tighter">XAEROVA</div>
         
         <div class="hidden lg:flex items-center">
             <div class="flex space-x-10 text-xs font-bold uppercase tracking-[0.3em] opacity-60 mr-12">
-                <a href="#" class="hover:text-white transition">Product</a>
-                <a href="#" class="hover:text-white transition">How it works</a>
-                <a href="#" class="hover:text-white transition">Specs</a>
+                <a href="#">Product</a>
+                <a href="#">How it works</a>
+                <a href="#">Specs</a>
             </div>
 
-            <div class="header-toggle">
+            <div class="flex items-center gap-3 mr-8">
                 <span id="toggleLabel" class="text-[10px] font-bold uppercase tracking-widest opacity-70">Light Mode</span>
                 <label class="switch">
-                    <input type="checkbox" id="themeToggle" onclick="toggleTheme()">
+                    <input type="checkbox" id="themeToggle" onchange="toggleTheme()">
                     <span class="slider"></span>
                 </label>
             </div>
 
-            <button class="border border-current px-6 py-2 text-xs font-bold uppercase tracking-widest hover:bg-current hover:text-black transition">
+            <button class="border border-current px-6 py-2 text-xs font-bold uppercase tracking-widest hover:bg-[var(--text-color)] hover:text-[var(--bg-color)] transition">
                 Get in touch
             </button>
         </div>
@@ -107,15 +111,96 @@
             EYES IN <br> THE SKY
         </h1>
         <p class="text-xl opacity-60 max-w-2xl mx-auto mb-12">
-            The Hive is the only fully autonomous, AI-powered drone security system built to protect commercial, industrial, and residential properties.
+            The Beehive is the only fully autonomous, AI-powered drone security system built to protect commercial, industrial, and residential properties.
         </p>
-        <div class="max-w-5xl mx-auto border border-white/10 overflow-hidden shadow-2xl">
-            <img src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&q=80&w=2000" alt="Autonomous Drone Dock">
+        <div class="max-w-5xl mx-auto overflow-hidden shadow-2xl">
+            <img src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&q=80&w=2000" alt="Autonomous Drone Unit" class="w-full h-auto">
         </div>
     </header>
 
-    <section class="py-24 px-10 max-w-7xl mx-auto grid md:grid-cols-3 gap-12">
-        <div>
-            <h3 class="text-2xl font-bold uppercase mb-4 logo-font">Industrial</h3>
-            <p class="opacity-60 text-sm leading-relaxed mb-6
+    <section class="py-24 px-10 max-w-7xl mx-auto border-t border-[var(--border-color)]">
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+            <div>
+                <h2 class="text-4xl font-black uppercase logo-font mb-8">Continuous Operation</h2>
+                <ul class="space-y-6 text-lg opacity-80">
+                    <li class="flex items-start gap-4">
+                        <span class="text-[var(--accent-color)] font-bold">01</span>
+                        <span>The drone autonomously navigates to destinations, avoiding obstacles in 99% of weather conditions.</span>
+                    </li>
+                    <li class="flex items-start gap-4">
+                        <span class="text-[var(--accent-color)] font-bold">02</span>
+                        <span>Proprietary battery systems support up to 20 minutes of total flight time depending on conditions.</span>
+                    </li>
+                    <li class="flex items-start gap-4">
+                        <span class="text-[var(--accent-color)] font-bold">03</span>
+                        <span>After missions, the unit autonomously returns to the Hive to land and recharge in minutes.</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <img src="https://images.unsplash.com/photo-1473968512647-3e447244af8f?auto=format&fit=crop&q=80&w=800" alt="Industrial Patrol">
+                <img src="https://images.unsplash.com/photo-1527977966376-1c8408f9f108?auto=format&fit=crop&q=80&w=800" alt="Commercial Security">
+            </div>
+        </div>
+    </section>
+
+    <footer class="pt-24 pb-12 px-10 border-t border-[var(--border-color)] mt-20">
+        <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-12 mb-20">
+            <div>
+                <h4 class="font-bold uppercase text-[10px] tracking-[0.3em] mb-8 opacity-40">Product</h4>
+                <ul class="text-sm space-y-4 font-semibold">
+                    <li><a href="#">Design your system</a></li>
+                    <li><a href="#">How it works</a></li>
+                    <li><a href="#">Videos</a></li>
+                    <li><a href="#">Specs</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold uppercase text-[10px] tracking-[0.3em] mb-8 opacity-40">Use cases</h4>
+                <ul class="text-sm space-y-4 font-semibold">
+                    <li><a href="#">Industrial</a></li>
+                    <li><a href="#">Commercial</a></li>
+                    <li><a href="#">Residential</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold uppercase text-[10px] tracking-[0.3em] mb-8 opacity-40">Company</h4>
+                <ul class="text-sm space-y-4 font-semibold">
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">News</a></li>
+                    <li><a href="#">Jobs</a></li>
+                    <li><a href="#">Privacy policy</a></li>
+                </ul>
+            </div>
+            <div class="flex flex-col justify-between items-start">
+                <div class="text-3xl font-black logo-font">XAEROVA</div>
+                <button class="mt-8 bg-[var(--text-color)] text-[var(--bg-color)] px-8 py-3 text-xs font-bold uppercase tracking-widest w-full md:w-auto">
+                    Get in touch
+                </button>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto pt-8 border-t border-[var(--border-color)] flex flex-col md:flex-row justify-between items-center opacity-30 text-[9px] uppercase tracking-[0.2em]">
+            <p>©2025 XAEROVA ROBOTICS INC. ALL RIGHTS RESERVED. AN ALL TURTLES PRODUCT.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const label = document.getElementById('toggleLabel');
+            const isLight = body.classList.toggle('light-mode');
+            
+            // Updates label based on current active theme
+            if (isLight) {
+                label.innerText = "Dark Mode";
+            } else {
+                label.innerText = "Light Mode";
+            }
+        }
+    </script>
+</body>
+</html>
 
