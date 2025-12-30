@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skymind | Remote Drone Docks</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #000000;
+            --fine-line: rgba(255, 255, 255, 0.15);
+        }
+        body {
+            background-color: var(--bg);
+            color: #ffffff;
+            font-family: 'Rajdhani', sans-serif;
+        }
+        .logo-font { font-family: 'Orbitron', sans-serif; letter-spacing: -0.05em; }
+        
+        /* Ensures all images stay Black & White */
+        img { filter: grayscale(100%) contrast(1.2) brightness(0.8); transition: 0.5s; }
+        img:hover { filter: grayscale(0%) contrast(1) brightness(1); }
+
+        .border-thin { border: 1px solid var(--fine-line); }
+        .hero-gradient {
+            background: linear-gradient(180deg, #000 0%, #0a0a0a 100%);
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="flex justify-between items-center px-10 py-8 border-b border-white/10 sticky top-0 bg-black/90 backdrop-blur-md z-50">
+        <div class="text-3xl font-black logo-font uppercase tracking-tighter">SKYMIND</div>
+        <div class="hidden lg:flex space-x-10 text-xs font-bold uppercase tracking-[0.3em] text-gray-400">
+            <a href="#" class="hover:text-white">Product</a>
+            <a href="#" class="hover:text-white">How it Works</a>
+            <a href="#" class="hover:text-white">Specs</a>
+            <a href="#" class="hover:text-white">Contact</a>
+        </div>
+        <button class="border border-white px-6 py-2 text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-black transition">
+            Get in touch
+        </button>
+    </nav>
+
+    <header class="hero-gradient pt-32 pb-20 px-10 text-center border-b border-white/5">
+        <h1 class="text-7xl md:text-9xl font-black uppercase logo-font mb-6 leading-none">
+            Security <br> That Flies
+        </h1>
+        <p class="text-xl text-gray-400 max-w-3xl mx-auto mb-12 tracking-wide">
+            The only fully autonomous, AI-powered drone security system built to protect commercial, industrial, and residential properties.
+        </p>
+        <div class="flex justify-center">
+            <div class="w-full max-w-5xl aspect-video bg-zinc-900 border-thin overflow-hidden relative group">
+                <img src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&q=80&w=2000" 
+                     alt="Drone Docking Station" class="w-full h-full object-cover">
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="w-20 h-20 border-2 border-white rounded-full flex items-center justify-center bg-black/40 backdrop-blur-sm cursor-pointer hover:scale-110 transition">
+                        <div class="w-0 h-0 border-t-[10px] border-t-transparent border-l-[18px] border-l-white border-b-[10px] border-b-transparent ml-2"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="py-32 px-10 max-w-7xl mx-auto">
+        <div class="grid md:grid-cols-3 gap-px bg-white/10 border border-white/10">
+            <div class="bg-black p-12 hover:bg-zinc-900 transition cursor-default">
+                <h3 class="text-2xl font-bold uppercase mb-4 tracking-tighter">Industrial</h3>
+                <p class="text-gray-500 mb-8 leading-relaxed">Defend critical infrastructure from theft and disruption with AI-powered patrols built to plug into existing networks.</p>
+                <img src="https://images.unsplash.com/photo-1473968512647-3e447244af8f?auto=format&fit=crop&q=80&w=800" class="w-full h-48 object-cover mb-6">
+                <a href="#" class="text-xs font-bold uppercase tracking-widest border-b border-white pb-1">Learn More</a>
+            </div>
+            <div class="bg-black p-12 hover:bg-zinc-900 transition cursor-default">
+                <h3 class="text-2xl font-bold uppercase mb-4 tracking-tighter">Commercial</h3>
+                <p class="text-gray-500 mb-8 leading-relaxed">Protect high-traffic sites with autonomous patrols that deter intruders and deliver actionable incident reports.</p>
+                <img src="https://images.unsplash.com/photo-1527977966376-1c8408f9f108?auto=format&fit=crop&q=80&w=800" class="w-full h-48 object-cover mb-6">
+                <a href="#" class="text-xs font-bold uppercase tracking-widest border-b border-white pb-1">Learn More</a>
+            </div>
+            <div class="bg-black p-12 hover:bg-zinc-900 transition cursor-default">
+                <h3 class="text-2xl font-bold uppercase mb-4 tracking-tighter">Residential</h3>
+                <p class="text-gray-500 mb-8 leading-relaxed">Real-time visibility and peace of mind for homeowners with on-demand flights and smart alerts.</p>
+                <img src="https://images.unsplash.com/photo-1506947411487-a56738267384?auto=format&fit=crop&q=80&w=800" class="w-full h-48 object-cover mb-6">
+                <a href="#" class="text-xs font-bold uppercase tracking-widest border-b border-white pb-1">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-black pt-20 pb-10 px-10 border-t border-white/10">
+        <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-12 mb-20">
+            <div>
+                <h4 class="text-white font-bold uppercase text-xs tracking-[0.2em] mb-6">Product</h4>
+                <ul class="text-gray-500 text-sm space-y-4">
+                    <li><a href="#" class="hover:text-white">Design your system</a></li>
+                    <li><a href="#" class="hover:text-white">How it works</a></li>
+                    <li><a href="#" class="hover:text-white">Videos</a></li>
+                    <li><a href="#" class="hover:text-white">Specs</a></li>
+                    <li><a href="#" class="hover:text-white">FAQ</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold uppercase text-xs tracking-[0.2em] mb-6">Use cases</h4>
+                <ul class="text-gray-500 text-sm space-y-4">
+                    <li><a href="#" class="hover:text-white">Industrial</a></li>
+                    <li><a href="#" class="hover:text-white">Commercial</a></li>
+                    <li><a href="#" class="hover:text-white">Residential</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold uppercase text-xs tracking-[0.2em] mb-6">Company</h4>
+                <ul class="text-gray-500 text-sm space-y-4">
+                    <li><a href="#" class="hover:text-white">About</a></li>
+                    <li><a href="#" class="hover:text-white">Contact</a></li>
+                    <li><a href="#" class="hover:text-white">News</a></li>
+                    <li><a href="#" class="hover:text-white">Jobs</a></li>
+                    <li><a href="#" class="hover:text-white">Privacy policy</a></li>
+                    <li><a href="#" class="hover:text-white">Quality policy</a></li>
+                    <li><a href="#" class="hover:text-white">Terms & conditions</a></li>
+                    <li><a href="#" class="hover:text-white">Patents</a></li>
+                </ul>
+            </div>
+            <div class="flex flex-col justify-between">
+                <div class="text-2xl font-black logo-font">SKYMIND</div>
+                <div class="mt-10">
+                    <button class="bg-white text-black px-6 py-3 text-xs font-bold uppercase tracking-widest w-full">Get in touch</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-gray-600 text-[10px] uppercase tracking-widest">
+            <p>©2025 Skymind Inc. All rights reserved. An All Turtles product.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
