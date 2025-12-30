@@ -7,51 +7,98 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
+        /* CSS Variables for seamless mode switching */
         :root {
             --bg: #000000;
-            --fine-line: rgba(255, 255, 255, 0.15);
+            --text-main: #ffffff;
+            --text-muted: #9ca3af;
+            --border: rgba(255, 255, 255, 0.15);
+            --nav-bg: rgba(0, 0, 0, 0.9);
+            --card-hover: #111111;
+            --btn-bg: #ffffff;
+            --btn-text: #000000;
         }
+
+        /* Light Mode Overrides */
+        body.light-mode {
+            --bg: #ffffff;
+            --text-main: #000000;
+            --text-muted: #4b5563;
+            --border: rgba(0, 0, 0, 0.15);
+            --nav-bg: rgba(255, 255, 255, 0.9);
+            --card-hover: #f9fafb;
+            --btn-bg: #000000;
+            --btn-text: #ffffff;
+        }
+
         body {
             background-color: var(--bg);
-            color: #ffffff;
+            color: var(--text-main);
             font-family: 'Rajdhani', sans-serif;
+            transition: background-color 0.4s ease, color 0.4s ease;
         }
+
         .logo-font { font-family: 'Orbitron', sans-serif; letter-spacing: -0.05em; }
         
-        /* Ensures all images stay Black & White */
-        img { filter: grayscale(100%) contrast(1.2) brightness(0.8); transition: 0.5s; }
+        /* Grayscale Images */
+        img { 
+            filter: grayscale(100%) contrast(1.2) brightness(0.8); 
+            transition: filter 0.5s ease; 
+        }
+        body.light-mode img { filter: grayscale(100%) contrast(1.1) brightness(1); }
         img:hover { filter: grayscale(0%) contrast(1) brightness(1); }
 
-        .border-thin { border: 1px solid var(--fine-line); }
-        .hero-gradient {
-            background: linear-gradient(180deg, #000 0%, #0a0a0a 100%);
+        .border-custom { border: 1px solid var(--border); }
+        nav { background-color: var(--nav-bg); border-bottom: 1px solid var(--border); }
+        
+        .mode-toggle {
+            cursor: pointer;
+            padding: 8px;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background-color: var(--btn-bg);
+            color: var(--btn-text);
+            transition: 0.3s;
         }
     </style>
 </head>
 <body>
 
-    <nav class="flex justify-between items-center px-10 py-8 border-b border-white/10 sticky top-0 bg-black/90 backdrop-blur-md z-50">
+    <nav class="flex justify-between items-center px-10 py-8 sticky top-0 backdrop-blur-md z-50">
         <div class="text-3xl font-black logo-font uppercase tracking-tighter">SKYMIND</div>
-        <div class="hidden lg:flex space-x-10 text-xs font-bold uppercase tracking-[0.3em] text-gray-400">
-            <a href="#" class="hover:text-white">Product</a>
-            <a href="#" class="hover:text-white">How it Works</a>
-            <a href="#" class="hover:text-white">Specs</a>
-            <a href="#" class="hover:text-white">Contact</a>
+        
+        <div class="hidden lg:flex space-x-10 text-xs font-bold uppercase tracking-[0.3em] text-[var(--text-muted)]">
+            <a href="#" class="hover:text-[var(--text-main)]">Product</a>
+            <a href="#" class="hover:text-[var(--text-main)]">How it Works</a>
+            <a href="#" class="hover:text-[var(--text-main)]">Specs</a>
+            <a href="#" class="hover:text-[var(--text-main)]">Contact</a>
         </div>
-        <button class="border border-white px-6 py-2 text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-black transition">
-            Get in touch
-        </button>
+
+        <div class="flex items-center space-x-4">
+            <div id="mode-btn" class="mode-toggle hover:bg-[var(--text-main)] hover:text-[var(--bg)]">
+                <span id="mode-icon" class="text-sm font-bold uppercase tracking-widest">Light Mode</span>
+            </div>
+            <button class="btn-primary px-6 py-2 text-xs font-bold uppercase tracking-widest border border-current">
+                Get in touch
+            </button>
+        </div>
     </nav>
 
-    <header class="hero-gradient pt-32 pb-20 px-10 text-center border-b border-white/5">
+    <header class="pt-32 pb-20 px-10 text-center border-b border-[var(--border)]">
         <h1 class="text-7xl md:text-9xl font-black uppercase logo-font mb-6 leading-none">
             Security <br> That Flies
         </h1>
-        <p class="text-xl text-gray-400 max-w-3xl mx-auto mb-12 tracking-wide">
-            The only fully autonomous, AI-powered drone security system built to protect commercial, industrial, and residential properties.
+        <p class="text-xl text-[var(--text-muted)] max-w-3xl mx-auto mb-12 tracking-wide">
+            The Beehive is the only fully autonomous, AI-powered drone security system built to protect commercial, industrial, and residential properties.
         </p>
         <div class="flex justify-center">
-            <div class="w-full max-w-5xl aspect-video bg-zinc-900 border-thin overflow-hidden relative group">
+            <div class="w-full max-w-5xl aspect-video bg-zinc-900 border-custom overflow-hidden relative group">
                 <img src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&q=80&w=2000" 
                      alt="Drone Docking Station" class="w-full h-full object-cover">
                 <div class="absolute inset-0 flex items-center justify-center">
@@ -64,73 +111,89 @@
     </header>
 
     <section class="py-32 px-10 max-w-7xl mx-auto">
-        <div class="grid md:grid-cols-3 gap-px bg-white/10 border border-white/10">
-            <div class="bg-black p-12 hover:bg-zinc-900 transition cursor-default">
+        <div class="grid md:grid-cols-3 gap-px bg-[var(--border)] border border-[var(--border)]">
+            <div class="bg-[var(--bg)] p-12 hover:bg-[var(--card-hover)] transition cursor-default">
                 <h3 class="text-2xl font-bold uppercase mb-4 tracking-tighter">Industrial</h3>
-                <p class="text-gray-500 mb-8 leading-relaxed">Defend critical infrastructure from theft and disruption with AI-powered patrols built to plug into existing networks.</p>
+                <p class="text-[var(--text-muted)] mb-8 leading-relaxed">Defend critical infrastructure from theft, graffiti, and disruption with AI-powered patrols.</p>
                 <img src="https://images.unsplash.com/photo-1473968512647-3e447244af8f?auto=format&fit=crop&q=80&w=800" class="w-full h-48 object-cover mb-6">
-                <a href="#" class="text-xs font-bold uppercase tracking-widest border-b border-white pb-1">Learn More</a>
+                <a href="#" class="text-xs font-bold uppercase tracking-widest border-b border-[var(--text-main)] pb-1">Learn More</a>
             </div>
-            <div class="bg-black p-12 hover:bg-zinc-900 transition cursor-default">
+            <div class="bg-[var(--bg)] p-12 hover:bg-[var(--card-hover)] transition cursor-default">
                 <h3 class="text-2xl font-bold uppercase mb-4 tracking-tighter">Commercial</h3>
-                <p class="text-gray-500 mb-8 leading-relaxed">Protect high-traffic sites with autonomous patrols that deter intruders and deliver actionable incident reports.</p>
+                <p class="text-[var(--text-muted)] mb-8 leading-relaxed">Protect high-traffic commercial sites with autonomous patrols that deter intruders and deliver incident reports.</p>
                 <img src="https://images.unsplash.com/photo-1527977966376-1c8408f9f108?auto=format&fit=crop&q=80&w=800" class="w-full h-48 object-cover mb-6">
-                <a href="#" class="text-xs font-bold uppercase tracking-widest border-b border-white pb-1">Learn More</a>
+                <a href="#" class="text-xs font-bold uppercase tracking-widest border-b border-[var(--text-main)] pb-1">Learn More</a>
             </div>
-            <div class="bg-black p-12 hover:bg-zinc-900 transition cursor-default">
+            <div class="bg-[var(--bg)] p-12 hover:bg-[var(--card-hover)] transition cursor-default">
                 <h3 class="text-2xl font-bold uppercase mb-4 tracking-tighter">Residential</h3>
-                <p class="text-gray-500 mb-8 leading-relaxed">Real-time visibility and peace of mind for homeowners with on-demand flights and smart alerts.</p>
+                <p class="text-[var(--text-muted)] mb-8 leading-relaxed">Give homeowners real-time visibility and peace of mind with on-demand flights and smart alerts.</p>
                 <img src="https://images.unsplash.com/photo-1506947411487-a56738267384?auto=format&fit=crop&q=80&w=800" class="w-full h-48 object-cover mb-6">
-                <a href="#" class="text-xs font-bold uppercase tracking-widest border-b border-white pb-1">Learn More</a>
+                <a href="#" class="text-xs font-bold uppercase tracking-widest border-b border-[var(--text-main)] pb-1">Learn More</a>
             </div>
         </div>
     </section>
 
-    <footer class="bg-black pt-20 pb-10 px-10 border-t border-white/10">
+    <footer class="bg-[var(--bg)] pt-20 pb-10 px-10 border-t border-[var(--border)]">
         <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-12 mb-20">
             <div>
-                <h4 class="text-white font-bold uppercase text-xs tracking-[0.2em] mb-6">Product</h4>
-                <ul class="text-gray-500 text-sm space-y-4">
-                    <li><a href="#" class="hover:text-white">Design your system</a></li>
-                    <li><a href="#" class="hover:text-white">How it works</a></li>
-                    <li><a href="#" class="hover:text-white">Videos</a></li>
-                    <li><a href="#" class="hover:text-white">Specs</a></li>
-                    <li><a href="#" class="hover:text-white">FAQ</a></li>
+                <h4 class="text-[var(--text-main)] font-bold uppercase text-xs tracking-[0.2em] mb-6">Product</h4>
+                <ul class="text-[var(--text-muted)] text-sm space-y-4">
+                    <li><a href="#" class="hover:text-[var(--text-main)]">Design your system</a></li>
+                    <li><a href="#" class="hover:text-[var(--text-main)]">How it works</a></li>
+                    <li><a href="#" class="hover:text-[var(--text-main)]">Videos</a></li>
+                    <li><a href="#" class="hover:text-[var(--text-main)]">Specs</a></li>
+                    <li><a href="#" class="hover:text-[var(--text-main)]">FAQ</a></li>
                 </ul>
             </div>
             <div>
-                <h4 class="text-white font-bold uppercase text-xs tracking-[0.2em] mb-6">Use cases</h4>
-                <ul class="text-gray-500 text-sm space-y-4">
-                    <li><a href="#" class="hover:text-white">Industrial</a></li>
-                    <li><a href="#" class="hover:text-white">Commercial</a></li>
-                    <li><a href="#" class="hover:text-white">Residential</a></li>
+                <h4 class="text-[var(--text-main)] font-bold uppercase text-xs tracking-[0.2em] mb-6">Use cases</h4>
+                <ul class="text-[var(--text-muted)] text-sm space-y-4">
+                    <li><a href="#" class="hover:text-[var(--text-main)]">Industrial</a></li>
+                    <li><a href="#" class="hover:text-[var(--text-main)]">Commercial</a></li>
+                    <li><a href="#" class="hover:text-[var(--text-main)]">Residential</a></li>
                 </ul>
             </div>
             <div>
-                <h4 class="text-white font-bold uppercase text-xs tracking-[0.2em] mb-6">Company</h4>
-                <ul class="text-gray-500 text-sm space-y-4">
-                    <li><a href="#" class="hover:text-white">About</a></li>
-                    <li><a href="#" class="hover:text-white">Contact</a></li>
-                    <li><a href="#" class="hover:text-white">News</a></li>
-                    <li><a href="#" class="hover:text-white">Jobs</a></li>
-                    <li><a href="#" class="hover:text-white">Privacy policy</a></li>
-                    <li><a href="#" class="hover:text-white">Quality policy</a></li>
-                    <li><a href="#" class="hover:text-white">Terms & conditions</a></li>
-                    <li><a href="#" class="hover:text-white">Patents</a></li>
+                <h4 class="text-[var(--text-main)] font-bold uppercase text-xs tracking-[0.2em] mb-6">Company</h4>
+                <ul class="text-[var(--text-muted)] text-sm space-y-4">
+                    <li><a href="#" class="hover:text-[var(--text-main)]">About</a></li>
+                    <li><a href="#" class="hover:text-[var(--text-main)]">Contact</a></li>
+                    <li><a href="#" class="hover:text-[var(--text-main)]">News</a></li>
+                    <li><a href="#" class="hover:text-[var(--text-main)]">Jobs</a></li>
+                    <li><a href="#" class="hover:text-[var(--text-main)]">Privacy policy</a></li>
+                    <li><a href="#" class="hover:text-[var(--text-main)]">Quality policy</a></li>
+                    <li><a href="#" class="hover:text-[var(--text-main)]">Terms & conditions</a></li>
+                    <li><a href="#" class="hover:text-[var(--text-main)]">Patents</a></li>
                 </ul>
             </div>
             <div class="flex flex-col justify-between">
-                <div class="text-2xl font-black logo-font">SKYMIND</div>
+                <div class="text-2xl font-black logo-font uppercase">SKYMIND</div>
                 <div class="mt-10">
-                    <button class="bg-white text-black px-6 py-3 text-xs font-bold uppercase tracking-widest w-full">Get in touch</button>
+                    <button class="btn-primary px-6 py-3 text-xs font-bold uppercase tracking-widest w-full">Get in touch</button>
                 </div>
             </div>
         </div>
 
-        <div class="max-w-7xl mx-auto pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-gray-600 text-[10px] uppercase tracking-widest">
+        <div class="max-w-7xl mx-auto pt-8 border-t border-[var(--border)] flex flex-col md:flex-row justify-between items-center text-[var(--text-muted)] text-[10px] uppercase tracking-widest">
             <p>©2025 Skymind Inc. All rights reserved. An All Turtles product.</p>
         </div>
     </footer>
+
+    <script>
+        const modeBtn = document.getElementById('mode-btn');
+        const modeIcon = document.getElementById('mode-icon');
+        const body = document.body;
+
+        modeBtn.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            
+            if(body.classList.contains('light-mode')) {
+                modeIcon.innerText = "Dark Mode";
+            } else {
+                modeIcon.innerText = "Light Mode";
+            }
+        });
+    </script>
 
 </body>
 </html>
