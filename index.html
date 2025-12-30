@@ -30,7 +30,7 @@
 
         .logo-font { font-family: 'Orbitron', sans-serif; }
 
-        /* Header Toggle Switch */
+        /* Toggle Switch Styling */
         .switch {
             position: relative;
             display: inline-block;
@@ -64,129 +64,144 @@
         input:checked + .slider { background-color: var(--accent-color); }
         input:checked + .slider:before { transform: translateX(22px); }
 
-        /* Image Filtering & Grid Styles */
-        img { 
+        /* Mobile Menu Overlay */
+        #mobileMenu {
+            transition: transform 0.3s ease-in-out;
+            transform: translateY(-100%);
+        }
+        #mobileMenu.active {
+            transform: translateY(0);
+        }
+
+        /* Image Filtering & Logo */
+        img.content-img { 
             filter: grayscale(100%) contrast(1.1); 
             transition: 0.5s ease;
         }
-        .light-mode img { filter: grayscale(100%) contrast(1.2); }
         
-        /* Ensure the Logo maintains visibility and doesn't get filtered too heavily */
         .logo-img {
-            filter: none !important;
-            height: 40px;
+            height: 28px;
             width: auto;
+            filter: none;
+            transition: filter 0.3s ease;
         }
-        .light-mode .logo-img {
-            filter: invert(1) !important;
-        }
+        @media (min-width: 768px) { .logo-img { height: 35px; } }
+
+        .light-mode .logo-img { filter: invert(1); }
 
         .feature-box {
             border: 1px solid var(--border-color);
             transition: background-color 0.3s;
         }
-        .feature-box:hover {
-            background-color: rgba(255, 255, 255, 0.03);
-        }
-        .light-mode .feature-box:hover {
-            background-color: rgba(0, 0, 0, 0.03);
-        }
+        .feature-box:hover { background-color: rgba(255, 255, 255, 0.03); }
+        .light-mode .feature-box:hover { background-color: rgba(0, 0, 0, 0.03); }
     </style>
 </head>
 <body>
 
-    <nav class="flex justify-between items-center px-6 md:px-10 py-4 md:py-6 border-b border-[var(--border-color)] sticky top-0 bg-[var(--bg-color)] z-50">
+    <nav class="flex justify-between items-center px-4 md:px-10 py-4 border-b border-[var(--border-color)] sticky top-0 bg-[var(--bg-color)] z-50">
         <div class="flex items-center">
-            <img src="c93020ff-87ad-4177-8dd8-e3fd4d6a8ded.jpeg" alt="XAEROVA Logo" class="logo-img">
+            <img src="c93020ff-87ad-4177-8dd8-e3fd4d6a8ded.jpeg" alt="XAEROVA" class="logo-img">
         </div>
         
-        <div class="hidden lg:flex space-x-10 text-xs font-bold uppercase tracking-[0.3em] opacity-60 mr-12">
-            <a href="#" class="hover:text-[var(--accent-color)]">Product</a>
-            <a href="#" class="hover:text-[var(--accent-color)]">Technology</a>
-            <a href="#" class="hover:text-[var(--accent-color)]">Compliance</a>
+        <div class="hidden lg:flex space-x-10 text-xs font-bold uppercase tracking-[0.3em] opacity-60">
+            <a href="#" class="hover:text-[var(--accent-color)] transition">Product</a>
+            <a href="#" class="hover:text-[var(--accent-color)] transition">Technology</a>
+            <a href="#" class="hover:text-[var(--accent-color)] transition">Compliance</a>
         </div>
 
-        <div class="flex items-center gap-4">
-            <div class="flex items-center gap-2 md:gap-3">
-                <span id="toggleLabel" class="text-[9px] md:text-[10px] font-bold uppercase tracking-widest opacity-70 whitespace-nowrap">Light Mode</span>
+        <div class="flex items-center gap-3 md:gap-6">
+            <div class="flex items-center gap-2">
+                <span id="toggleLabel" class="text-[9px] font-bold uppercase tracking-widest opacity-70 hidden sm:inline">Light Mode</span>
                 <label class="switch">
                     <input type="checkbox" id="themeToggle" onchange="toggleTheme()">
                     <span class="slider"></span>
                 </label>
             </div>
-
-            <button class="hidden md:block border border-current px-6 py-2 text-xs font-bold uppercase tracking-widest hover:bg-[var(--text-color)] hover:text-[var(--bg-color)] transition">
+            
+            <button class="border border-current px-3 md:px-6 py-2 text-[10px] md:text-xs font-bold uppercase tracking-widest hover:bg-[var(--text-color)] hover:text-[var(--bg-color)] transition">
                 Get in touch
+            </button>
+
+            <button class="lg:hidden flex flex-col gap-1.5" onclick="toggleMobileMenu()">
+                <div class="w-6 h-0.5 bg-current"></div>
+                <div class="w-6 h-0.5 bg-current"></div>
+                <div class="w-6 h-0.5 bg-current"></div>
             </button>
         </div>
     </nav>
 
-    <header class="pt-20 md:pt-32 pb-12 md:pb-20 px-6 md:px-10 text-center">
+    <div id="mobileMenu" class="fixed inset-0 bg-[var(--bg-color)] z-40 lg:hidden flex flex-col items-center justify-center space-y-8 text-2xl font-bold uppercase tracking-[0.2em] border-b border-[var(--border-color)]">
+        <button class="absolute top-6 right-6 text-4xl" onclick="toggleMobileMenu()">&times;</button>
+        <a href="#" onclick="toggleMobileMenu()" class="hover:text-[var(--accent-color)]">Product</a>
+        <a href="#" onclick="toggleMobileMenu()" class="hover:text-[var(--accent-color)]">Technology</a>
+        <a href="#" onclick="toggleMobileMenu()" class="hover:text-[var(--accent-color)]">Compliance</a>
+    </div>
+
+    <header class="pt-20 md:pt-32 pb-16 px-6 text-center">
         <h1 class="text-5xl md:text-9xl font-black uppercase logo-font mb-6 leading-none">
             EYES IN <br> THE SKY
         </h1>
-        <p class="text-lg md:text-xl opacity-60 max-w-2xl mx-auto mb-10 md:mb-12">
+        <p class="text-lg md:text-xl opacity-60 max-w-2xl mx-auto mb-12">
             The Beehive is the only fully autonomous, AI-powered drone security system built to protect commercial, industrial, and residential properties.
         </p>
         <div class="max-w-5xl mx-auto overflow-hidden border border-[var(--border-color)]">
-            <img src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&q=80&w=2000" class="w-full h-auto" alt="XAEROVA Drone Hub">
+            <img src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&q=80&w=2000" class="w-full h-auto content-img" alt="Drone Unit">
         </div>
     </header>
 
-    <section class="py-12 md:py-24 px-6 md:px-10 max-w-7xl mx-auto">
+    <section class="py-20 px-6 md:px-10 max-w-7xl mx-auto">
         <div class="grid md:grid-cols-3 gap-6">
             <div class="feature-box p-8 flex flex-col">
                 <h3 class="text-2xl font-bold uppercase logo-font mb-4">Industrial</h3>
-                <p class="opacity-60 text-sm leading-relaxed mb-8 md:h-20">Defend critical infrastructure from theft, graffiti, and disruption with AI-powered patrols built to plug into your existing security network.</p>
-                <img src="https://images.unsplash.com/photo-1473968512647-3e447244af8f?auto=format&fit=crop&q=80&w=800" class="w-full grayscale h-48 object-cover">
+                <p class="opacity-60 text-sm leading-relaxed mb-8 md:h-20">Defend critical infrastructure from theft and disruption with AI-powered patrols.</p>
+                <img src="https://images.unsplash.com/photo-1473968512647-3e447244af8f?auto=format&fit=crop&q=80&w=800" class="w-full grayscale h-48 object-cover content-img">
             </div>
 
             <div class="feature-box p-8 flex flex-col">
                 <h3 class="text-2xl font-bold uppercase logo-font mb-4">Commercial</h3>
-                <p class="opacity-60 text-sm leading-relaxed mb-8 md:h-20">Protect high-traffic commercial sites with autonomous patrols that deter intruders, detect vulnerabilities, and deliver actionable incident reports.</p>
-                <img src="https://images.unsplash.com/photo-1527977966376-1c8408f9f108?auto=format&fit=crop&q=80&w=800" class="w-full grayscale h-48 object-cover">
+                <p class="opacity-60 text-sm leading-relaxed mb-8 md:h-20">Protect high-traffic sites with autonomous patrols that detect vulnerabilities.</p>
+                <img src="https://images.unsplash.com/photo-1527977966376-1c8408f9f108?auto=format&fit=crop&q=80&w=800" class="w-full grayscale h-48 object-cover content-img">
             </div>
 
             <div class="feature-box p-8 flex flex-col">
                 <h3 class="text-2xl font-bold uppercase logo-font mb-4">Residential</h3>
-                <p class="opacity-60 text-sm leading-relaxed mb-8 md:h-20">Give homeowners and communities real-time visibility and peace of mind with on-demand flights, smart alerts, and seamless integration into private security systems.</p>
-                <img src="https://images.unsplash.com/photo-1506947411487-a56738267384?auto=format&fit=crop&q=80&w=800" class="w-full grayscale h-48 object-cover">
+                <p class="opacity-60 text-sm leading-relaxed mb-8 md:h-20">Give communities peace of mind with smart alerts and private security integration.</p>
+                <img src="https://images.unsplash.com/photo-1506947411487-a56738267384?auto=format&fit=crop&q=80&w=800" class="w-full grayscale h-48 object-cover content-img">
             </div>
         </div>
     </section>
 
-    <footer class="pt-24 pb-12 px-6 md:px-10 border-t border-[var(--border-color)] bg-inherit mt-10 md:mt-20">
-        <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-12 mb-20">
+    <footer class="pt-24 pb-12 px-6 md:px-10 border-t border-[var(--border-color)] bg-inherit">
+        <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-12 mb-20 text-[var(--text-color)]">
             <div>
                 <h4 class="font-bold uppercase text-[10px] tracking-[0.3em] mb-8 opacity-40">Product</h4>
                 <ul class="text-sm space-y-4 font-semibold opacity-80">
-                    <li><a href="#" class="hover:text-[var(--accent-color)]">Design your system</a></li>
-                    <li><a href="#" class="hover:text-[var(--accent-color)]">How it works</a></li>
-                    <li><a href="#" class="hover:text-[var(--accent-color)]">Videos</a></li>
-                    <li><a href="#" class="hover:text-[var(--accent-color)]">Specs</a></li>
-                    <li><a href="#" class="hover:text-[var(--accent-color)]">FAQ</a></li>
+                    <li><a href="#" class="hover:opacity-50 transition">Design your system</a></li>
+                    <li><a href="#" class="hover:opacity-50 transition">How it works</a></li>
+                    <li><a href="#" class="hover:opacity-50 transition">Videos</a></li>
+                    <li><a href="#" class="hover:opacity-50 transition">Specs</a></li>
                 </ul>
             </div>
             <div>
                 <h4 class="font-bold uppercase text-[10px] tracking-[0.3em] mb-8 opacity-40">Use cases</h4>
                 <ul class="text-sm space-y-4 font-semibold opacity-80">
-                    <li><a href="#" class="hover:text-[var(--accent-color)]">Industrial</a></li>
-                    <li><a href="#" class="hover:text-[var(--accent-color)]">Commercial</a></li>
-                    <li><a href="#" class="hover:text-[var(--accent-color)]">Residential</a></li>
+                    <li><a href="#" class="hover:opacity-50 transition">Industrial</a></li>
+                    <li><a href="#" class="hover:opacity-50 transition">Commercial</a></li>
+                    <li><a href="#" class="hover:opacity-50 transition">Residential</a></li>
                 </ul>
             </div>
             <div>
                 <h4 class="font-bold uppercase text-[10px] tracking-[0.3em] mb-8 opacity-40">Company</h4>
                 <ul class="text-sm space-y-4 font-semibold opacity-80">
-                    <li><a href="#" class="hover:text-[var(--accent-color)]">About</a></li>
-                    <li><a href="#" class="hover:text-[var(--accent-color)]">Contact</a></li>
-                    <li><a href="#" class="hover:text-[var(--accent-color)]">News</a></li>
-                    <li><a href="#" class="hover:text-[var(--accent-color)]">Jobs</a></li>
-                    <li><a href="#" class="hover:text-[var(--accent-color)]">Privacy policy</a></li>
+                    <li><a href="#" class="hover:opacity-50 transition">About</a></li>
+                    <li><a href="#" class="hover:opacity-50 transition">Contact</a></li>
+                    <li><a href="#" class="hover:opacity-50 transition">Jobs</a></li>
+                    <li><a href="#" class="hover:opacity-50 transition">Privacy policy</a></li>
                 </ul>
             </div>
             <div class="flex flex-col justify-between items-start">
-                <img src="c93020ff-87ad-4177-8dd8-e3fd4d6a8ded.jpeg" alt="XAEROVA Logo" class="logo-img mb-6">
+                <img src="c93020ff-87ad-4177-8dd8-e3fd4d6a8ded.jpeg" alt="XAEROVA" class="logo-img mb-6">
                 <button class="bg-[var(--text-color)] text-[var(--bg-color)] px-8 py-3 text-xs font-bold uppercase tracking-widest w-full">
                     Get in touch
                 </button>
@@ -203,6 +218,11 @@
             const label = document.getElementById('toggleLabel');
             const isLight = body.classList.toggle('light-mode');
             label.innerText = isLight ? "Dark Mode" : "Light Mode";
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('active');
         }
     </script>
 </body>
