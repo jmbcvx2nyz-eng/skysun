@@ -30,7 +30,34 @@
 
         .logo-font { font-family: 'Orbitron', sans-serif; }
 
-        /* Mobile Header Fixes */
+        /* Header Layout Fixes */
+        nav {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr; /* This forces the middle section to be perfectly centered */
+            align-items: center;
+        }
+
+        /* LOGO STYLING - Made much bigger */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            height: 60px; /* Taller header for bigger logo */
+        }
+
+        .logo-img {
+            height: 140%; /* Goes slightly outside container to crop black space */
+            width: auto;
+            transform: scale(2.2); /* Zooms in on the "XAEROVA" text to make it huge */
+            filter: none !important;
+            object-fit: contain;
+        }
+        
+        .light-mode .logo-img {
+            filter: invert(1) !important;
+        }
+
+        /* Toggle Switch Styling */
         .switch {
             position: relative;
             display: inline-block;
@@ -65,49 +92,39 @@
         input:checked + .slider { background-color: var(--accent-color); }
         input:checked + .slider:before { transform: translateX(20px); }
 
-        .logo-img {
-            height: 22px;
-            width: auto;
-            display: block;
-            filter: none !important;
-        }
-        .light-mode .logo-img {
-            filter: invert(1) !important;
-        }
-
         img { filter: grayscale(100%) contrast(1.1); }
         .feature-box { border: 1px solid var(--border-color); }
 
         /* Hamburger Menu Icon */
         .menu-bar {
-            width: 20px;
+            width: 22px;
             height: 2px;
             background-color: var(--text-color);
             margin: 4px 0;
-            transition: 0.3s;
         }
     </style>
 </head>
 <body>
 
-    <nav class="flex justify-between items-center px-4 md:px-10 py-5 border-b border-[var(--border-color)] sticky top-0 bg-[var(--bg-color)] z-50">
+    <nav class="px-4 md:px-10 py-4 border-b border-[var(--border-color)] sticky top-0 bg-[var(--bg-color)] z-50">
         
-        <div class="lg:hidden flex flex-col justify-center cursor-pointer order-1">
-            <div class="menu-bar"></div>
-            <div class="menu-bar"></div>
+        <div class="flex items-center gap-4">
+            <div class="lg:hidden flex flex-col justify-center cursor-pointer">
+                <div class="menu-bar"></div>
+                <div class="menu-bar"></div>
+            </div>
+            <div class="logo-container">
+                <img src="93020ff-87ad-4177-8dd8-e3fd4d6a8ded.jpeg" alt="XAEROVA" class="logo-img">
+            </div>
+        </div>
+        
+        <div class="hidden lg:flex space-x-12 text-xs font-bold uppercase tracking-[0.4em] opacity-60">
+            <a href="#" class="hover:text-[var(--accent-color)] transition">Product</a>
+            <a href="#" class="hover:text-[var(--accent-color)] transition">Technology</a>
+            <a href="#" class="hover:text-[var(--accent-color)] transition">Specs</a>
         </div>
 
-        <div class="flex-shrink-0 order-2 lg:order-1 ml-4 lg:ml-0">
-            <img src="93020ff-87ad-4177-8dd8-e3fd4d6a8ded.jpeg" alt="XAEROVA" class="logo-img">
-        </div>
-        
-        <div class="hidden lg:flex space-x-10 text-xs font-bold uppercase tracking-[0.3em] opacity-60 order-2">
-            <a href="#" class="hover:text-[var(--accent-color)]">Product</a>
-            <a href="#" class="hover:text-[var(--accent-color)]">Technology</a>
-            <a href="#" class="hover:text-[var(--accent-color)]">Specs</a>
-        </div>
-
-        <div class="flex items-center gap-3 order-3">
+        <div class="flex items-center justify-end gap-6">
             <div class="flex items-center gap-2">
                 <span id="toggleLabel" class="text-[8px] md:text-[9px] font-bold uppercase tracking-widest opacity-60 whitespace-nowrap">Light Mode</span>
                 <label class="switch">
@@ -115,19 +132,18 @@
                     <span class="slider"></span>
                 </label>
             </div>
-            
-            <button class="hidden lg:block border border-current px-5 py-2 text-[10px] font-bold uppercase tracking-widest hover:bg-[var(--text-color)] hover:text-[var(--bg-color)] transition">
-                Get in touch
+            <button class="hidden lg:block border border-current px-6 py-2 text-[10px] font-bold uppercase tracking-widest hover:bg-[var(--text-color)] hover:text-[var(--bg-color)] transition">
+                Contact
             </button>
         </div>
     </nav>
 
-    <header class="pt-16 pb-12 px-6 text-center">
-        <h1 class="text-4xl md:text-8xl font-black uppercase logo-font mb-6 leading-none">
+    <header class="pt-24 pb-16 px-6 text-center">
+        <h1 class="text-5xl md:text-9xl font-black uppercase logo-font mb-6 leading-none">
             EYES IN <br> THE SKY
         </h1>
-        <p class="text-base opacity-60 max-w-2xl mx-auto mb-10">
-            Fully autonomous, AI-powered drone security system built to protect commercial, industrial, and residential properties.
+        <p class="text-lg opacity-60 max-w-2xl mx-auto mb-10">
+            The Beehive is the only fully autonomous, AI-powered drone security system built to protect commercial, industrial, and residential properties.
         </p>
         <div class="max-w-5xl mx-auto border border-[var(--border-color)] overflow-hidden">
             <img src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&q=80&w=2000" class="w-full h-auto" alt="XAEROVA Drone Hub">
@@ -138,7 +154,7 @@
         <div class="grid md:grid-cols-3 gap-6">
             <div class="feature-box p-8 flex flex-col">
                 <h3 class="text-xl font-bold uppercase logo-font mb-4">Industrial</h3>
-                <p class="opacity-60 text-sm leading-relaxed mb-8 h-20">Defend critical infrastructure from theft and disruption with AI-powered patrols.</p>
+                <p class="opacity-60 text-sm leading-relaxed mb-8 h-20">Defend critical infrastructure from theft, graffiti, and disruption with AI-powered patrols.</p>
                 <img src="https://images.unsplash.com/photo-1473968512647-3e447244af8f?auto=format&fit=crop&q=80&w=800" class="w-full h-40 object-cover mt-auto">
             </div>
             <div class="feature-box p-8 flex flex-col">
@@ -148,17 +164,18 @@
             </div>
             <div class="feature-box p-8 flex flex-col">
                 <h3 class="text-xl font-bold uppercase logo-font mb-4">Residential</h3>
-                <p class="opacity-60 text-sm leading-relaxed mb-8 h-20">Give homeowners real-time visibility with on-demand flights and smart alerts.</p>
+                <p class="opacity-60 text-sm leading-relaxed mb-8 h-20">Give homeowners and communities real-time visibility and peace of mind with smart alerts.</p>
                 <img src="https://images.unsplash.com/photo-1506947411487-a56738267384?auto=format&fit=crop&q=80&w=800" class="w-full h-40 object-cover mt-auto">
             </div>
         </div>
     </section>
 
-    <footer class="pt-16 pb-12 px-6 border-t border-[var(--border-color)] bg-inherit mt-10">
-        <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-12 mb-16">
+    <footer class="pt-20 pb-12 px-6 border-t border-[var(--border-color)] bg-inherit mt-10">
+        <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-12 mb-16 text-left">
             <div>
-                <h4 class="font-bold uppercase text-[10px] tracking-[0.3em] mb-6 opacity-40">Product</h4>
+                <h4 class="font-bold uppercase text-[10px] tracking-widest mb-6 opacity-40">Product</h4>
                 <ul class="text-sm space-y-4 font-semibold opacity-80">
+                    <li><a href="#">Design your system</a></li>
                     <li><a href="#">How it works</a></li>
                     <li><a href="#">Videos</a></li>
                     <li><a href="#">Specs</a></li>
@@ -166,7 +183,7 @@
                 </ul>
             </div>
             <div>
-                <h4 class="font-bold uppercase text-[10px] tracking-[0.3em] mb-6 opacity-40">Company</h4>
+                <h4 class="font-bold uppercase text-[10px] tracking-widest mb-6 opacity-40">Company</h4>
                 <ul class="text-sm space-y-4 font-semibold opacity-80">
                     <li><a href="#">About</a></li>
                     <li><a href="#">Contact</a></li>
@@ -174,9 +191,11 @@
                     <li><a href="#">Privacy policy</a></li>
                 </ul>
             </div>
-            <div class="col-span-2 flex flex-col items-end">
-                <img src="93020ff-87ad-4177-8dd8-e3fd4d6a8ded.jpeg" alt="XAEROVA" class="logo-img mb-6">
-                <p class="text-[9px] uppercase tracking-widest opacity-30">©2025 XAEROVA ROBOTICS INC. ALL RIGHTS RESERVED.</p>
+            <div class="col-span-2 flex flex-col items-end justify-center">
+                <div class="logo-container">
+                    <img src="93020ff-87ad-4177-8dd8-e3fd4d6a8ded.jpeg" alt="XAEROVA" class="logo-img">
+                </div>
+                <p class="text-[9px] uppercase tracking-widest opacity-30 mt-4">©2025 XAEROVA ROBOTICS INC.</p>
             </div>
         </div>
     </footer>
