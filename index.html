@@ -94,7 +94,9 @@
         /* CUSTOM ANIMATION TWEAKS */
         .feature-box { border: 1px solid var(--border-color); transition: all 0.4s ease; }
         .feature-box:hover { transform: translateY(-10px); border-color: var(--accent-teal); }
-        img { filter: grayscale(100%) contrast(1.1); }
+        
+        /* Grayscale Images for Theme Consistency */
+        img.surveillance-img { filter: grayscale(100%) contrast(1.1); }
     </style>
 </head>
 <body>
@@ -130,26 +132,72 @@
             The Beehive is the only fully autonomous drone security system built to protect commercial, industrial, and residential properties.
         </p>
         <div data-aos="zoom-in" data-aos-delay="400" class="max-w-4xl mx-auto border border-white/5 shadow-2xl">
-            <img src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&q=80&w=2000" class="w-full h-auto opacity-80">
+            <img src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&q=80&w=2000" class="surveillance-img w-full h-auto opacity-80" alt="Drone Unit">
         </div>
     </header>
 
-    <section class="py-20 px-6 md:px-10 max-w-7xl mx-auto">
+    <section class="py-12 px-6 md:px-10 max-w-7xl mx-auto">
         <div class="grid md:grid-cols-3 gap-8">
             <div data-aos="fade-right" class="feature-box p-8 flex flex-col">
-                <h3 class="logo-font text-xl font-bold uppercase mb-4">Industrial</h3>
-                <p class="opacity-60 text-sm mb-8 h-20">Defend critical infrastructure from theft and disruption with patrols built to plug into existing networks.</p>
-                <img src="https://images.unsplash.com/photo-1473968512647-3e447244af8f?auto=format&fit=crop&q=80&w=800" class="w-full h-40 object-cover mt-auto">
+                <h3 class="logo-font text-xl font-bold uppercase mb-4">Autonomous</h3>
+                <p class="opacity-60 text-sm mb-8 h-20">Deploy instantly via motion sensors or cameras to investigate suspicious activity on any part of your property.</p>
+                <img src="https://images.unsplash.com/photo-1579829366248-204da841f76b?auto=format&fit=crop&q=80&w=800" class="surveillance-img w-full h-40 object-cover mt-auto">
             </div>
             <div data-aos="fade-up" data-aos-delay="200" class="feature-box p-8 flex flex-col">
-                <h3 class="logo-font text-xl font-bold uppercase mb-4">Commercial</h3>
-                <p class="opacity-60 text-sm mb-8 h-20">Protect high-traffic commercial sites with autonomous patrols that deter intruders.</p>
-                <img src="https://images.unsplash.com/photo-1527977966376-1c8408f9f108?auto=format&fit=crop&q=80&w=800" class="w-full h-40 object-cover mt-auto">
+                <h3 class="logo-font text-xl font-bold uppercase mb-4">AI Detection</h3>
+                <p class="opacity-60 text-sm mb-8 h-20">The system identifies people, vehicles, and animals in real-time, giving you eyes where you need them most.</p>
+                <img src="https://images.unsplash.com/photo-1535348776287-1049261b5f43?auto=format&fit=crop&q=80&w=800" class="surveillance-img w-full h-40 object-cover mt-auto">
             </div>
             <div data-aos="fade-left" data-aos-delay="400" class="feature-box p-8 flex flex-col">
-                <h3 class="logo-font text-xl font-bold uppercase mb-4">Residential</h3>
-                <p class="opacity-60 text-sm mb-8 h-20">Give homeowners peace of mind with smart alerts and private security integration.</p>
-                <img src="https://images.unsplash.com/photo-1506947411487-a56738267384?auto=format&fit=crop&q=80&w=800" class="w-full h-40 object-cover mt-auto">
+                <h3 class="logo-font text-xl font-bold uppercase mb-4">All-Weather</h3>
+                <p class="opacity-60 text-sm mb-8 h-20">Autonomously navigate to the destination, avoiding obstacles and flying in 99% of weather conditions.</p>
+                <img src="https://images.unsplash.com/photo-1473968512647-3e447244af8f?auto=format&fit=crop&q=80&w=800" class="surveillance-img w-full h-40 object-cover mt-auto">
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 px-6 md:px-10 max-w-7xl mx-auto border-t border-[var(--border-color)]">
+        <h2 data-aos="fade-down" class="logo-font text-4xl mb-16 text-center uppercase tracking-widest">Global Use Cases</h2>
+        
+        <div class="grid md:grid-cols-2 gap-12">
+            <div data-aos="fade-right" class="flex flex-col md:flex-row gap-6 items-center">
+                <img src="https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?auto=format&fit=crop&q=80&w=400" class="surveillance-img w-full md:w-48 h-48 object-cover rounded-xl" alt="Emergency Surveillance">
+                <div>
+                    <h3 class="logo-font text-xl font-bold mb-2 uppercase">Emergency Response</h3>
+                    <p class="opacity-60 text-sm">Deploy instantly to monitor suspicious activity or emergency situations without waiting for ground personnel.</p>
+                </div>
+            </div>
+
+            <div data-aos="fade-left" class="flex flex-col md:flex-row gap-6 items-center">
+                <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80&w=400" class="surveillance-img w-full md:w-48 h-48 object-cover rounded-xl" alt="Industrial Surveillance">
+                <div>
+                    <h3 class="logo-font text-xl font-bold mb-2 uppercase">Industrial Sites</h3>
+                    <p class="opacity-60 text-sm">Protect critical infrastructure from theft and vandalism with randomized autonomous patrols.</p>
+                </div>
+            </div>
+
+            <div data-aos="fade-right" class="flex flex-col md:flex-row gap-6 items-center">
+                <img src="https://images.unsplash.com/photo-1493946740624-fde7019f8655?auto=format&fit=crop&q=80&w=400" class="surveillance-img w-full md:w-48 h-48 object-cover rounded-xl" alt="Ports Surveillance">
+                <div>
+                    <h3 class="logo-font text-xl font-bold mb-2 uppercase">Ports & Logistics</h3>
+                    <p class="opacity-60 text-sm">Monitor sprawling harbor networks and large-scale industrial sprawl where traditional cameras have blind spots.</p>
+                </div>
+            </div>
+
+            <div data-aos="fade-left" class="flex flex-col md:flex-row gap-6 items-center">
+                <img src="https://images.unsplash.com/photo-1519452635265-7b1fbfd1e4e0?auto=format&fit=crop&q=80&w=400" class="surveillance-img w-full md:w-48 h-48 object-cover rounded-xl" alt="Commercial Surveillance">
+                <div>
+                    <h3 class="logo-font text-xl font-bold mb-2 uppercase">Commercial Sites</h3>
+                    <p class="opacity-60 text-sm">Protect high-traffic retail and office environments, deterring intruders before damage happens.</p>
+                </div>
+            </div>
+
+            <div data-aos="fade-up" class="flex flex-col md:flex-row gap-6 items-center md:col-span-2 md:max-w-xl md:mx-auto">
+                <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=400" class="surveillance-img w-full md:w-48 h-48 object-cover rounded-xl" alt="Residential Surveillance">
+                <div>
+                    <h3 class="logo-font text-xl font-bold mb-2 uppercase">Residential Peace</h3>
+                    <p class="opacity-60 text-sm">Give homeowners and gated communities real-time visibility and smart alerts, fully geocaged to your property lines.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -159,7 +207,7 @@
         <div class="space-y-6">
             <div data-aos="fade-up" class="border-b border-[var(--border-color)] pb-4">
                 <h4 class="font-bold text-sm uppercase tracking-wider mb-2">How long can the drone fly?</h4>
-                <p class="opacity-60 text-sm">The battery can support up to 20 minutes of total flight time depending on weather conditions.</p>
+                <p class="opacity-60 text-sm">The battery supports up to 20 minutes of total flight time depending on weather conditions.</p>
             </div>
             <div data-aos="fade-up" data-aos-delay="100" class="border-b border-[var(--border-color)] pb-4">
                 <h4 class="font-bold text-sm uppercase tracking-wider mb-2">How long does it take to recharge?</h4>
@@ -178,7 +226,7 @@
             </div>
             <div class="flex flex-col items-center md:items-end">
                 <img src="Logo.jpg" alt="XAEROVA" class="logo-img mb-4">
-                <p class="text-[9px] uppercase tracking-widest opacity-30">©2025 XAEROVA ROBOTICS INC.</p>
+                <p class="text-[9px] uppercase tracking-widest opacity-30">©2025 XAEROVA ROBOTICS INC. AN ALL TURTLES PRODUCT.</p>
             </div>
         </div>
     </footer>
