@@ -29,20 +29,18 @@
             font-family: 'Rajdhani', sans-serif;
             transition: background-color 0.3s ease, color 0.3s ease;
             margin: 0;
-            /* CRITICAL: Fixes extra side space */
-            overflow-x: hidden; 
+            overflow-x: hidden;
             width: 100vw;
         }
 
         .logo-font { font-family: 'Orbitron', sans-serif; }
 
-        /* FIXED HEADER: Strict 3-Track Grid */
+        /* --- DUAL-LAYOUT HEADER --- */
         nav {
             display: grid;
-            grid-template-columns: 80px 1fr 110px; /* Locked widths for left/right sides */
             align-items: center;
-            padding: 0 15px;
-            height: 60px; 
+            padding: 0 20px;
+            height: 70px; 
             border-bottom: 1px solid var(--border-color);
             position: sticky;
             top: 0;
@@ -52,20 +50,35 @@
             box-sizing: border-box;
         }
 
-        /* LOGO SIZE: Perfectly balanced */
-        .logo-container { 
-            display: flex; 
-            justify-content: center; 
-            align-items: center;
-            overflow: hidden;
+        /* Mobile Layout (< 1024px) */
+        @media (max-width: 1023px) {
+            nav {
+                grid-template-columns: 1fr auto 1fr; /* Sandwich | Logo | Toggle */
+            }
+            .desktop-nav, .contact-btn { display: none; }
+            .mobile-sandwich { display: flex; }
+            .nav-logo-container { justify-content: center; }
         }
+
+        /* Desktop Layout (>= 1024px) */
+        @media (min-width: 1024px) {
+            nav {
+                grid-template-columns: 1fr 2fr 1fr; /* Logo | Nav Links | Toggle+Contact */
+            }
+            .mobile-sandwich { display: none; }
+            .desktop-nav { display: flex; justify-content: center; }
+            .nav-logo-container { justify-content: flex-start; }
+            .nav-right { display: flex; justify-content: flex-end; align-items: center; gap: 2rem; }
+        }
+
+        /* LOGO STYLING */
         .logo-img {
-            height: 18px; /* Capped small for mobile */
+            height: 18px; 
             width: auto;
             filter: none !important;
             object-fit: contain;
         }
-        @media (min-width: 768px) { .logo-img { height: 24px; } }
+        @media (min-width: 1024px) { .logo-img { height: 22px; } }
         .light-mode .logo-img { filter: invert(1) !important; }
 
         /* THEME TOGGLE */
@@ -120,131 +133,188 @@
     </div>
 
     <nav>
-        <div class="flex items-center">
-            <button onclick="toggleMenu()" class="p-2">
+        <div class="nav-side">
+            <button onclick="toggleMenu()" class="mobile-sandwich p-2 flex flex-col">
                 <div class="bar"></div><div class="bar"></div><div class="bar"></div>
             </button>
+            <div class="hidden lg:flex nav-logo-container">
+                <img src="Logo.jpg" alt="XAEROVA" class="logo-img">
+            </div>
         </div>
         
-        <div class="logo-container">
-            <img src="Logo.jpg" alt="XAEROVA" class="logo-img">
+        <div class="nav-center">
+            <div class="lg:hidden flex nav-logo-container">
+                <img src="Logo.jpg" alt="XAEROVA" class="logo-img">
+            </div>
+            <div class="hidden lg:flex desktop-nav gap-12 text-[10px] font-bold uppercase tracking-[0.4em] opacity-60">
+                <a href="#residential" class="hover:text-[var(--accent-teal)] transition">Residential</a>
+                <a href="#commercial" class="hover:text-[var(--accent-teal)] transition">Commercial</a>
+                <a href="#enterprise" class="hover:text-[var(--accent-teal)] transition">Enterprise</a>
+            </div>
         </div>
 
-        <div class="flex justify-end items-center gap-2">
-            <span id="modeText" class="text-[8px] font-bold uppercase tracking-widest opacity-60">Dark Mode</span>
-            <label class="switch">
-                <input type="checkbox" id="themeToggle" onchange="runSwitch()">
-                <span class="slider"></span>
-            </label>
+        <div class="nav-right">
+            <div class="flex items-center gap-3">
+                <span id="modeText" class="text-[8px] font-bold uppercase tracking-widest opacity-60">Dark Mode</span>
+                <label class="switch">
+                    <input type="checkbox" id="themeToggle" onchange="runSwitch()">
+                    <span class="slider"></span>
+                </label>
+            </div>
+            <button class="hidden lg:block border border-current px-6 py-2 text-[10px] font-bold uppercase tracking-widest hover:bg-[var(--text-color)] hover:text-[var(--bg-color)] transition contact-btn">
+                Contact
+            </button>
         </div>
     </nav>
 
-    <header class="pt-20 pb-12 px-6 text-center">
-        <h1 data-aos="fade-up" class="logo-font text-4xl md:text-8xl font-black uppercase mb-6 leading-none">
+    <header class="pt-24 pb-16 px-6 text-center">
+        <h1 data-aos="fade-up" class="logo-font text-5xl md:text-9xl font-black uppercase mb-6 leading-none">
             Eyes In <br> The Sky
         </h1>
-        <p data-aos="fade-up" data-aos-delay="200" class="text-base opacity-60 max-w-2xl mx-auto mb-10 px-4">
+        <p data-aos="fade-up" data-aos-delay="200" class="text-lg opacity-60 max-w-2xl mx-auto mb-10">
             The Beehive is the only fully autonomous, AI-powered drone security system built to protect high-value infrastructure.
         </p>
-        <div data-aos="zoom-in" data-aos-delay="400" class="max-w-4xl mx-auto border border-[var(--border-color)] overflow-hidden">
+        <div data-aos="zoom-in" data-aos-delay="400" class="max-w-4xl mx-auto border border-[var(--border-color)] overflow-hidden shadow-2xl">
             <img src="https://images.unsplash.com/photo-1506947411487-a56738267384?auto=format&fit=crop&q=80&w=2000" class="grayscale-img w-full h-auto opacity-80" alt="Drone Technology">
         </div>
     </header>
 
-    <section class="py-12 px-6 max-w-7xl mx-auto">
+    <section class="py-12 px-6 md:px-10 max-w-7xl mx-auto">
         <div class="grid md:grid-cols-3 gap-6">
             <div data-aos="fade-up" class="hover-box p-8 flex flex-col items-center text-center">
-                <img src="https://images.unsplash.com/photo-1521714161819-15534968fc5f?auto=format&fit=crop&q=80&w=800" class="grayscale-img w-full h-32 object-cover mb-6">
+                <img src="https://images.unsplash.com/photo-1521714161819-15534968fc5f?auto=format&fit=crop&q=80&w=800" class="grayscale-img w-full h-32 object-cover mb-6" alt="Remote Flying">
                 <h3 class="logo-font text-lg font-bold uppercase tracking-widest">remote flying</h3>
+                <p class="text-xs opacity-50 mt-4">Command your airspace from anywhere with high-fidelity telemetry.</p>
             </div>
             <div data-aos="fade-up" data-aos-delay="100" class="hover-box p-8 flex flex-col items-center text-center">
-                <img src="https://images.unsplash.com/photo-1527977966376-1c8408f9f108?auto=format&fit=crop&q=80&w=800" class="grayscale-img w-full h-32 object-cover mb-6">
+                <img src="https://images.unsplash.com/photo-1527977966376-1c8408f9f108?auto=format&fit=crop&q=80&w=800" class="grayscale-img w-full h-32 object-cover mb-6" alt="Light and Effective">
                 <h3 class="logo-font text-lg font-bold uppercase tracking-widest">light and effective</h3>
+                <p class="text-xs opacity-50 mt-4">Optimized aerodynamics for agile response and efficient patrol cycles.</p>
             </div>
             <div data-aos="fade-up" data-aos-delay="200" class="hover-box p-8 flex flex-col items-center text-center">
-                <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&q=80&w=800" class="grayscale-img w-full h-32 object-cover mb-6">
+                <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&q=80&w=800" class="grayscale-img w-full h-32 object-cover mb-6" alt="Easy to Carry">
                 <h3 class="logo-font text-lg font-bold uppercase tracking-widest">easy to carry</h3>
+                <p class="text-xs opacity-50 mt-4">Compact modular design built for rapid on-site setup.</p>
             </div>
         </div>
     </section>
 
-    <div class="py-10 text-center"><h2 class="logo-font text-4xl md:text-6xl font-black uppercase opacity-20">USE CASES</h2></div>
+    <div class="pt-20 pb-10 text-center">
+        <h2 data-aos="fade-up" class="logo-font text-4xl md:text-6xl font-black uppercase tracking-tighter opacity-20">USE CASES</h2>
+    </div>
 
     <section id="residential" class="py-16 px-6 max-w-7xl mx-auto border-t border-[var(--border-color)]">
-        <h2 class="logo-font text-2xl mb-12 uppercase opacity-80">Residential</h2>
-        <div class="grid md:grid-cols-3 gap-6">
-            <div class="use-case-card p-6">
-                <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=600" class="grayscale-img w-full h-40 object-cover mb-4">
+        <h2 class="logo-font text-2xl mb-12 uppercase tracking-widest opacity-80">Residential</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="use-case-card p-6 flex flex-col">
+                <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=800" class="grayscale-img w-full h-48 object-cover mb-4">
                 <h4 class="font-bold uppercase text-sm mb-2">Private Estates</h4>
-                <p class="text-xs opacity-60">High-end security for luxury private grounds.</p>
+                <p class="text-xs opacity-60">Aerial surveillance for luxury private grounds.</p>
             </div>
-            <div class="use-case-card p-6">
-                <img src="https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&q=80&w=600" class="grayscale-img w-full h-40 object-cover mb-4">
+            <div class="use-case-card p-6 flex flex-col">
+                <img src="https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&q=80&w=800" class="grayscale-img w-full h-48 object-cover mb-4">
                 <h4 class="font-bold uppercase text-sm mb-2">Gated Communities</h4>
-                <p class="text-xs opacity-60">Smart perimeter alerts for community safety.</p>
+                <p class="text-xs opacity-60">Continuous perimeter security and smart alerts.</p>
             </div>
-            <div class="use-case-card p-6">
-                <img src="https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&q=80&w=600" class="grayscale-img w-full h-40 object-cover mb-4">
+            <div class="use-case-card p-6 flex flex-col">
+                <img src="https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&q=80&w=800" class="grayscale-img w-full h-48 object-cover mb-4">
                 <h4 class="font-bold uppercase text-sm mb-2">Property Monitoring</h4>
-                <p class="text-xs opacity-60">Visual verification of motion triggers.</p>
+                <p class="text-xs opacity-60">Instant investigation of motion sensor triggers.</p>
             </div>
         </div>
     </section>
 
     <section id="commercial" class="py-16 px-6 max-w-7xl mx-auto border-t border-[var(--border-color)]">
-        <h2 class="logo-font text-2xl mb-12 uppercase opacity-80">Commercial</h2>
-        <div class="grid md:grid-cols-3 gap-6">
-            <div class="use-case-card p-6">
-                <img src="https://images.unsplash.com/photo-1519452635265-7b1fbfd1e4e0?auto=format&fit=crop&q=80&w=600" class="grayscale-img w-full h-40 object-cover mb-4">
+        <h2 class="logo-font text-2xl mb-12 uppercase tracking-widest opacity-80">Commercial</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="use-case-card p-6 flex flex-col">
+                <img src="https://images.unsplash.com/photo-1519452635265-7b1fbfd1e4e0?auto=format&fit=crop&q=80&w=800" class="grayscale-img w-full h-48 object-cover mb-4">
                 <h4 class="font-bold uppercase text-sm mb-2">Retail Centers</h4>
-                <p class="text-xs opacity-60">Deterrent patrols for shopping hubs.</p>
+                <p class="text-xs opacity-60">High-traffic site security and deterrent patrols.</p>
             </div>
-            <div class="use-case-card p-6">
-                <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&q=80&w=600" class="grayscale-img w-full h-40 object-cover mb-4">
+            <div class="use-case-card p-6 flex flex-col">
+                <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&q=80&w=800" class="grayscale-img w-full h-48 object-cover mb-4">
                 <h4 class="font-bold uppercase text-sm mb-2">Construction</h4>
-                <p class="text-xs opacity-60">Asset protection and progress monitoring.</p>
+                <p class="text-xs opacity-60">Real-time asset protection and aerial progress monitoring.</p>
             </div>
-            <div class="use-case-card p-6">
-                <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=600" class="grayscale-img w-full h-40 object-cover mb-4">
+            <div class="use-case-card p-6 flex flex-col">
+                <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=800" class="grayscale-img w-full h-48 object-cover mb-4">
                 <h4 class="font-bold uppercase text-sm mb-2">Logistics Hubs</h4>
-                <p class="text-xs opacity-60">Safety protocols for large warehouse yards.</p>
+                <p class="text-xs opacity-60">Sprawling warehouse coverage and inventory safety.</p>
             </div>
         </div>
     </section>
 
-    <section class="py-24 px-6 max-w-7xl mx-auto border-t border-[var(--border-color)]">
+    <section id="enterprise" class="py-16 px-6 max-w-7xl mx-auto border-t border-[var(--border-color)]">
+        <h2 class="logo-font text-2xl mb-12 uppercase tracking-widest opacity-80">Enterprise / Government</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="use-case-card p-6 flex flex-col">
+                <img src="https://images.unsplash.com/photo-1578301978018-3005759f48f7?auto=format&fit=crop&q=80&w=800" class="grayscale-img w-full h-48 object-cover mb-4">
+                <h4 class="font-bold uppercase text-sm mb-2">Mining Operations</h4>
+                <p class="text-xs opacity-60">Surveillance for remote and hazardous industrial zones.</p>
+            </div>
+            <div class="use-case-card p-6 flex flex-col">
+                <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&q=80&w=800" class="grayscale-img w-full h-48 object-cover mb-4">
+                <h4 class="font-bold uppercase text-sm mb-2">Precision Farming</h4>
+                <p class="text-xs opacity-60">Monitoring large-scale crop health and land security.</p>
+            </div>
+            <div class="use-case-card p-6 flex flex-col">
+                <img src="https://images.unsplash.com/photo-1493946740624-fde7019f8655?auto=format&fit=crop&q=80&w=800" class="grayscale-img w-full h-48 object-cover mb-4">
+                <h4 class="font-bold uppercase text-sm mb-2">Port Security</h4>
+                <p class="text-xs opacity-60">Autonomous border and logistics infrastructure protection.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 px-6 md:px-10 max-w-7xl mx-auto border-t border-[var(--border-color)]">
         <div class="grid md:grid-cols-2 gap-16 items-center">
             <div data-aos="fade-right">
-                <h2 class="logo-font text-2xl mb-8 uppercase">Designed for Privacy</h2>
-                <ul class="space-y-4 text-sm opacity-60">
-                    <li><strong>Geocaged Airspace:</strong> Drone stays inside property lines.</li>
-                    <li><strong>Real-time Blurring:</strong> AI blurs objects beyond boundaries.</li>
+                <h2 class="logo-font text-3xl mb-8 uppercase">Designed for Privacy</h2>
+                <ul class="space-y-6 text-sm opacity-80">
+                    <li><strong>Geocaged Airspace:</strong> Drone stays strictly within property lines.</li>
+                    <li><strong>Real-time Blurring:</strong> AI automatically blurs objects beyond boundaries.</li>
+                    <li><strong>ISO Certified:</strong> Enterprise-grade encryption and information security.</li>
                 </ul>
             </div>
-            <div class="grid grid-cols-2 gap-4">
-                <div class="spec-box p-6"><div class="text-xl font-bold logo-font text-[var(--accent-teal)]">20min</div><div class="text-[9px] uppercase opacity-40">Flight Time</div></div>
-                <div class="spec-box p-6"><div class="text-xl font-bold logo-font text-[var(--accent-teal)]">2X</div><div class="text-[9px] uppercase opacity-40">Recharge Speed</div></div>
+            <div data-aos="fade-left" class="grid grid-cols-2 gap-4">
+                <div class="spec-box p-6">
+                    <div class="text-2xl font-bold logo-font text-[var(--accent-teal)]">20min</div>
+                    <div class="text-[10px] uppercase opacity-40">Flight Time</div>
+                </div>
+                <div class="spec-box p-6">
+                    <div class="text-2xl font-bold logo-font text-[var(--accent-teal)]">2X</div>
+                    <div class="text-[10px] uppercase opacity-40">Recharge Speed</div>
+                </div>
             </div>
         </div>
     </section>
 
-    <footer class="py-12 px-6 border-t border-[var(--border-color)]">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10">
-            <div class="flex gap-6 text-[10px] font-bold uppercase opacity-40"><a href="#">How it works</a><a href="#">Specs</a></div>
-            <div class="flex flex-col items-center md:items-end">
-                <img src="Logo.jpg" alt="XAEROVA" class="logo-img mb-4">
-                <p class="text-[8px] uppercase tracking-widest opacity-30">©2026 XAEROVA ROBOTICS.</p>
+    <footer class="pt-20 pb-12 px-6 border-t border-[var(--border-color)]">
+        <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-12 mb-16">
+            <div>
+                <h4 class="font-bold uppercase text-[10px] tracking-widest mb-6 opacity-40">Product</h4>
+                <ul class="text-sm space-y-4 font-semibold opacity-80"><li><a href="#">How it works</a></li><li><a href="#">Specs</a></li></ul>
+            </div>
+            <div>
+                <h4 class="font-bold uppercase text-[10px] tracking-widest mb-6 opacity-40">Company</h4>
+                <ul class="text-sm space-y-4 font-semibold opacity-80"><li><a href="#">About</a></li><li><a href="#">Contact</a></li></ul>
+            </div>
+            <div class="col-span-2 flex flex-col items-end">
+                <img src="Logo.jpg" alt="XAEROVA" class="logo-img mb-6">
+                <p class="text-[9px] uppercase tracking-widest opacity-30 mt-8">©2026 XAEROVA ROBOTICS. ALL RIGHTS RESERVED.</p>
             </div>
         </div>
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({ duration: 800, once: true });
+        AOS.init({ duration: 1000, once: true });
         function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('active'); }
         function runSwitch() {
-            const isLight = document.body.classList.toggle('light-mode');
-            document.getElementById('modeText').innerText = isLight ? "Light Mode" : "Dark Mode";
+            const body = document.body;
+            const text = document.getElementById('modeText');
+            const isLight = body.classList.toggle('light-mode');
+            text.innerText = isLight ? "Light Mode" : "Dark Mode";
         }
     </script>
 </body>
