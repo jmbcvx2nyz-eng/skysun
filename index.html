@@ -161,7 +161,52 @@
             </div>
         </div>
     </nav>
+<!-- SCROLLYTELLING SECTION -->
+<div id="scrollytelling-container">
+    <div id="scrollytelling-loading">
+        <div class="loading-spinner"></div>
+        <p class="text-sm text-white/60" id="scrollytelling-loading">Loading... 0%</p>
+    </div>
 
+    <div id="scrollytelling-scroll">
+        <div id="scrollytelling-frame">
+            <canvas id="scrollytelling-canvas"></canvas>
+            
+            <!-- Text Overlays -->
+            <div id="scrollytelling-title" class="scrollytelling-text px-4">
+                <div class="text-center">
+                    <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white/90 mb-4" style="font-family: 'Orbitron', sans-serif;">
+                        Skymind V0
+                    </h1>
+                    <p class="text-xl md:text-2xl lg:text-3xl text-white/60">Aerospace Security</p>
+                </div>
+            </div>
+
+            <div id="scrollytelling-params" class="scrollytelling-text px-8 md:px-16 lg:px-24" style="justify-content: flex-start;">
+                <h2 class="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white/90" style="font-family: 'Orbitron', sans-serif;">
+                    Remote Flying
+                </h2>
+            </div>
+
+            <div id="scrollytelling-speed" class="scrollytelling-text px-8 md:px-16 lg:px-24" style="justify-content: flex-end;">
+                <h2 class="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white/90 text-right" style="font-family: 'Orbitron', sans-serif;">
+                    Built for Convenience.<br /><span class="text-white/70">Designed for Scale.</span>
+                </h2>
+            </div>
+
+            <div id="scrollytelling-cta" class="scrollytelling-text px-4">
+                <div class="text-center">
+                    <h2 class="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white/90 mb-8" style="font-family: 'Orbitron', sans-serif;">
+                        Take Full Control
+                    </h2>
+                    <button class="pointer-events-auto px-8 py-4 bg-white/10 border border-white/20 rounded-full text-white/90 text-lg font-medium hover:bg-white/20 transition-all">
+                        Get Started
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
     <header class="pt-24 pb-16 px-6 text-center">
         <h1 data-aos="fade-up" class="logo-font text-5xl md:text-9xl font-black uppercase mb-6 leading-none">
             Eyes In <br> The Sky
